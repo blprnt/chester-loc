@@ -127,6 +127,7 @@ function draw() {
 
 function clearAnimations() {
   for(var n in animationList) {
+    animationList[n].pause();
     animationList[n].complete = null;
   }
 }
