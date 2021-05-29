@@ -1,0 +1,183 @@
+html, body { 
+  height: 100%;
+  font-family: 'Merriweather', serif;
+  margin:0px;
+  background-color:black;
+  overflow: hidden;
+}
+
+.glitchButton {
+ z-index:2; 
+}
+
+.footer {
+  font-family: 'Merriweather', serif;
+  display:block;
+  position:fixed;
+  width:100%;
+  left:0px;
+  bottom:20px;
+  font-size:3vw;
+  z-index: 1;
+  color:white;
+  
+  margin-left:10px;
+  margin-right:10px;
+  
+  
+}
+
+.footer a {
+ color:#AAAAAA 
+}
+
+.footer #about {
+  color:#AAAAAA;
+  margin-left:10px;
+  margin-right:10px;
+  margin-top:5px;
+  float:right;
+  font-size:2.5vw;
+  background:rgba(0,0,0,0.5);
+}
+
+.clicker {
+  
+  display:block;
+  position:fixed;
+  color:#444444; 
+  font-size:2vw;
+  z-index: 1;
+  background:rgba(255,255,255,0.5);
+}
+
+.section {
+  font-family: 'Merriweather', serif;
+  display:block;
+  position:fixed;
+  left:30px;
+  top:30px;
+  color:#BBBBBB;
+  font-size:18pt;
+  z-index: 1;
+  background:rgba(0,0,0,0.5);
+}
+
+.titleBlock {
+  font-family: 'Merriweather', serif;
+  position:absolute;
+  display:block;
+  max-width:1850px;
+  width:auto;
+  left:50px;
+  top:80px;
+  color:white;
+  font-size:30pt;
+  background:rgba(0,0,0,0.5);
+}
+
+.count {
+  font-family: 'Merriweather', serif;
+  display:block;
+  position:fixed;
+  left:32px;
+  top:34px;
+  color:#AAAAAA;
+  font-size:14pt;
+  z-index: 1;
+  background:rgba(0,0,0,0.5);
+}
+
+
+.colorblock {
+  display:inline-block;
+  position:relative;
+  top:0px;
+  height:100%;
+}
+
+.sun {
+  left:0px;
+  width:100%;
+}
+
+.contain {
+  display:block;
+  position:fixed;
+  left:0px;
+  top:0px;
+  height:100%;
+  width:100%;
+  overflow-x: visible;
+  overflow-y: visible;
+}
+
+
+.palette {
+  display:block;
+  position:absolute;
+  left:0px;
+  top:0px;
+  height:100%;
+  width:100000px;
+  overflow-x: visible;
+  overflow-y: visible;
+}
+
+.rainTextHolder {
+  position:absolute;
+  display:inline-block;
+  left:0px;
+  width:auto;
+  height:100%;
+  top:0px;
+  transform: rotate(-90deg);
+  transform-origin: left top;
+}
+
+.sunTextHolder {
+  position:absolute;
+  display:inline-block;
+  left:0px;
+  width:4080px;
+  height:100%;
+  top:0px;
+  transform: translate(-20px,7680px) rotate(-90deg);
+  transform-origin: left top;
+}
+
+.rainText {
+  font-family: 'Merriweather', serif;
+  position:absolute;
+  display:inline;
+  left:1080px;
+  top:10px;
+  width:auto;
+  white-space: nowrap;
+  color:white;
+  font-size:10pt;
+  opacity:0.7;
+  
+}
+
+.sunText {
+  font-family: 'Merriweather', serif;
+  position:absolute;
+  display:inline;
+  left:0px;
+  top:10px;
+  width:4000px;
+  white-space: nowrap;
+  color:white;
+  font-size:10pt;
+  opacity:0.7;
+  
+}
+
+.swing {
+  transform: rotate(90deg);
+  transform-origin: left top;
+  height:7680px;
+  left:7680px;
+  opacity:0;
+}
