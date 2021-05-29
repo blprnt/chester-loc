@@ -136,6 +136,7 @@ html, body {
   width:100000px;
   overflow-x: visible;
   overflow-y: visible;
+  cursor: none;
 }
 
 .rainTextHolder {
