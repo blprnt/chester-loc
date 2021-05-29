@@ -56,7 +56,7 @@ var usLit = {
 };
 
 var sunrise = {
-  url: "/data/rise2.json",
+  url: "/data/rise3.json",
   name: "Sunrise",
 };
 
