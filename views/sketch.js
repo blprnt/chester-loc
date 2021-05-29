@@ -253,10 +253,10 @@ function sunRiseSet() {
   var tMap = {};
   for (var i = 0; i < blocks.length; i++) {
     var t = colors[blocks[i].cIndex].Title.join(" ");
-    if (!tmap[t]) {
+    if (!tMap[t]) {
       blocks[i].addClass("rainMaker");
       titles[blocks[i].id()] = t;
-      tmap[t] = true;
+      tMap[t] = true;
     }
     rc++;
   }
@@ -516,14 +516,14 @@ function fuzzColor(_c) {
   colorMode(HSB, 100);
 
   var fc = color(_c.hex);
-  var f = 10;
+  var f = 3;
   var nc = color(
     hue(fc) + random(-f, f),
     saturation(fc) + random(-f, f),
     brightness(fc) + random(-f, f)
   );
 
-  return fc;
+  return nc;
 }
 
 function clearBlocks() {
