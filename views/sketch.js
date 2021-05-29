@@ -477,7 +477,10 @@ function focusBlock(i, noOpen) {
 function keyTyped() {
   if (key == "a") advance();
   if (key == "b") closeAllBlocks();
-  if (key == "r") makeItRain();
+  if (key == "f") makeItRain();
+  if (key == "s") sunSet();
+  if (key == "r") sunRise();
+
 }
 
 function display(_i) {
