@@ -507,12 +507,14 @@ function focusBlock(i, noOpen) {
   var targ = -b.position().x + (sc + fstack) * 1920;
   var offset = targ - cpos;
   var dur = min(8000, 500 + abs(offset));
-  anime({
+  var a1 = anime({
     targets: ".palette",
     left: targ + "px",
     duration: dur,
     easing: "cubicBezier(.5, .05, .1, .3)",
   });
+
+  animationList.push(a1);
 
   var openCount = 0;
   if (!noOpen) openBlock(b, dur);
