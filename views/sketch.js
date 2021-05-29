@@ -171,7 +171,6 @@ function advance(force) {
     loadColors(floor(random(4)));
     palette.html("");
   } else if (currentScene < 4) {
-    
     var dice = force == true ? 0 : random(100);
 
     if (dice < 40 || fi >= blocks.length - 1) {
@@ -209,14 +208,6 @@ function sunRiseSet() {
   console.log("RISE/SET");
   var sstack = colors.length * w;
   var stime = 3.5 * 60 * 1000;
-
-  anime({
-    targets: ".swing",
-    opacity: 1,
-    easing: "linear",
-    delay: 1000,
-    duration: 10000,
-  });
 
   if (currentScene == 4) {
     //SUNRISE
@@ -259,9 +250,14 @@ function sunRiseSet() {
 
   var titles = {};
   //modified rain
+  var tMap = {};
   for (var i = 0; i < blocks.length; i++) {
-    blocks[i].addClass("rainMaker");
-    titles[blocks[i].id()] = colors[blocks[i].cIndex].Title.join(" ");
+    var t = colors[blocks[i].cIndex].Title.join(" ");
+    if (!tmap[t]) {
+      blocks[i].addClass("rainMaker");
+      titles[blocks[i].id()] = t;
+      tmap[t] = true;
+    }
     rc++;
   }
 
@@ -484,7 +480,6 @@ function keyTyped() {
   if (key == "f") makeItRain();
   if (key == "s") sunSet();
   if (key == "r") sunRise();
-
 }
 
 function display(_i) {
