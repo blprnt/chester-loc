@@ -106,6 +106,7 @@ function draw() {
     }
     countElement.html(sections[currentScene].name + ": " + stack + " items");
     if (stack == colors.length) {
+      console.log("STACKING COMPLETE.");
       advance(true);
       stacking = false;
     }
