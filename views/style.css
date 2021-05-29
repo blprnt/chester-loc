@@ -192,9 +192,8 @@ html, body {
 }
 
 .swing {
-  transform: rotate(90deg);
+  transform: translate(7680px,0px) rotate(90deg);
   transform-origin: left top;
   height:7680px;
-  left:7680px;
   opacity:1;
 }
