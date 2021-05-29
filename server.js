@@ -12,7 +12,7 @@ app.use(express.static('views'));
 // listen for requests :)
 var listener = app.listen(5676, function () {
   console.log('Your app is listening on port ' + listener.address().port);
-  exec("firefox localhost:5676", (error, stdout, stderr) => {
+  exec("firefox --kiosk localhost:5676", (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
         return;
