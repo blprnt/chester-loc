@@ -227,6 +227,8 @@ function sunRiseSet() {
       delay: 1000,
       duration: stime,
       complete: function(anim) {
+        palette.removeClass("swing");
+        palette.position(0, 0);
         loadColors(floor(random(4)));
       },
     });
@@ -242,7 +244,8 @@ function sunRiseSet() {
       top: 0 + "px",
       easing: "linear",
       delay: 1000,
-      duration: function(anim) {
+      duration: stime,
+      complete: function(anim) {
         palette.removeClass("swing");
         palette.position(0, 0);
         loadColors(floor(random(4)));
