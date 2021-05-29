@@ -34,37 +34,33 @@ var currentScene;
 
 //Data URLs
 var vizMaterials = {
-  url:
-    "/data/colorsVisualMaterials_all.json",
-  name: "Visuals"
+  url: "/data/colorsVisualMaterials_all.json",
+  name: "Visuals",
 };
 
 var maps = {
-  url:
-    "/data/colorsMaps_all.json",
-  name: "Maps"
+  url: "/data/colorsMaps_all.json",
+  name: "Maps",
 };
 
 var music = {
-  url:
-    "/data/colorsMusic_all.json",
-  name: "Music"
+  url: "/data/colorsMusic_all.json",
+  name: "Music",
 };
 
 var usLit = {
-  url:
-    "/data/colorsBooks_all.json",
-  name: "US Literature"
+  url: "/data/colorsBooks_all.json",
+  name: "US Literature",
 };
 
 var sunrise = {
   url: "/data/rise.json",
-  name: "Sunrise"
+  name: "Sunrise",
 };
 
 var sunset = {
   url: "/data/set.json",
-  name: "Sunset"
+  name: "Sunset",
 };
 
 var sections = [vizMaterials, usLit, music, maps, sunrise, sunset];
@@ -93,7 +89,7 @@ function draw() {
   //timer
   var now = new Date();
   var timeStr = now.getHours() + ":" + nf(now.getMinutes(), 2);
-  if (frameCount % 100 == 0) console.log(timeStr + ":" + timeQ[0].time);
+  //if (frameCount % 100 == 0) console.log(timeStr + ":" + timeQ[0].time);
   if (timeStr == timeQ[0].time) {
     timeQ[0].trigger();
     timeQ.push(timeQ.shift());
@@ -134,34 +130,36 @@ function setTimes() {
   timeQ = [
     {
       time: SUNRISE,
-      trigger: sunRise
+      trigger: sunRise,
     },
     {
       time: SUNSET,
-      trigger: sunSet
+      trigger: sunSet,
     },
     {
       time: "0:01",
-      trigger: setTimes
-    }
+      trigger: setTimes,
+    },
   ];
-  
+
   //Spin to the correct order
   var now = new Date();
   //Get a fractional hour - ie. 12.5
-  var hf = (now.getHours()) + (now.getMinutes() / 60);
-  
-  while (hf > parseFloat(timeQ[0].time.split(":")[0]) + (parseFloat(timeQ[0].time.split(":")[1])/60)) {
+  var hf = now.getHours() + now.getMinutes() / 60;
+
+  while (
+    hf >
+    parseFloat(timeQ[0].time.split(":")[0]) +
+      parseFloat(timeQ[0].time.split(":")[1]) / 60
+  ) {
     timeQ.push(timeQ.shift());
   }
-  
+
   console.log("-----------SPUN TO: " + timeQ[0].time);
 }
 
 function advance(force) {
-  
   console.log("ADVANCE");
-  
 
   if (sceneCount == sceneMax) {
     sceneCount = 0;
@@ -172,8 +170,7 @@ function advance(force) {
     loadColors(floor(random(4)));
     palette.html("");
   } else if (currentScene < 4) {
-    palette.removeClass("swing");
-    palette.position(0,0);
+    
     var dice = force == true ? 0 : random(100);
 
     if (dice < 40 || fi >= blocks.length - 1) {
@@ -217,7 +214,7 @@ function sunRiseSet() {
     opacity: 1,
     easing: "linear",
     delay: 1000,
-    duration: 10000
+    duration: 10000,
   });
 
   if (currentScene == 4) {
@@ -229,9 +226,9 @@ function sunRiseSet() {
       easing: "linear",
       delay: 1000,
       duration: stime,
-      complete:function(anim) {
+      complete: function(anim) {
         loadColors(floor(random(4)));
-      }
+      },
     });
   }
 
@@ -246,48 +243,44 @@ function sunRiseSet() {
       easing: "linear",
       delay: 1000,
       duration: function(anim) {
+        palette.removeClass("swing");
+        palette.position(0, 0);
         loadColors(floor(random(4)));
-      }
+      },
     });
   }
-  
-  
+
   var rc = 0;
   console.log("sunrain");
 
-  
   var titles = {};
   //modified rain
   for (var i = 0; i < blocks.length; i++) {
-    
     blocks[i].addClass("rainMaker");
     titles[blocks[i].id()] = colors[blocks[i].cIndex].Title.join(" ");
     rc++;
   }
-  
+
   console.log(titles);
 
   //add text
   var rainMakers = selectAll(".rainMaker");
   for (var i = 0; i < rainMakers.length; i++) {
-    
-      try {
-        var b = rainMakers[i];
-        var t = titles[b.id()];
-        var ph = createDiv("");
-        ph.class("sunTextHolder");
-        ph.parent(b);
+    try {
+      var b = rainMakers[i];
+      var t = titles[b.id()];
+      var ph = createDiv("");
+      ph.class("sunTextHolder");
+      ph.parent(b);
 
-        var p = createElement("p", t);
-        p.parent(ph);
-        p.class("sunText");
-        p.position(random(7680));
-      } catch (e) {
-        console.log(e);
-      }
-    
+      var p = createElement("p", t);
+      p.parent(ph);
+      p.class("sunText");
+      p.position(random(7680));
+    } catch (e) {
+      console.log(e);
+    }
   }
-
 }
 
 function makeItRain() {
@@ -307,7 +300,7 @@ function makeItRain() {
     targets: ".palette",
     left: -blocks[si].position().x + "px",
     duration: 3000,
-    easing: "cubicBezier(.5, .05, .1, .3)"
+    easing: "cubicBezier(.5, .05, .1, .3)",
   });
 
   //open the rest of the blocks
@@ -319,7 +312,7 @@ function makeItRain() {
     width: rw,
     delay: anime.stagger(10, { start: 3000 }),
     duration: 100,
-    easing: "easeOutCubic"
+    easing: "easeOutCubic",
   });
   //add text
   var rainMakers = selectAll(".rainMaker");
@@ -344,7 +337,7 @@ function makeItRain() {
     left: "0px",
     delay: anime.stagger(100, { start: 5000 }),
     duration: 1000,
-    easing: "easeOutCubic"
+    easing: "easeOutCubic",
   });
 
   anime({
@@ -353,13 +346,13 @@ function makeItRain() {
     opacity: 0,
     delay: anime.stagger(50, { start: 35000 }),
     duration: 500,
-    easing: "easeOutCubic"
+    easing: "easeOutCubic",
   });
 
   anime({
     targets: null,
     duration: 45000,
-    complete: endRain
+    complete: endRain,
   });
 }
 
@@ -369,7 +362,7 @@ function endRain() {
     width: w,
     delay: anime.stagger(5),
     duration: 20,
-    easing: "easeOutCubic"
+    easing: "easeOutCubic",
   });
 
   anime({
@@ -381,7 +374,7 @@ function endRain() {
         blocks[i].html("");
       }
       advance();
-    }
+    },
   });
 }
 
@@ -402,7 +395,7 @@ function closeAllBlocks() {
     easing: "cubicBezier(.5, .05, .1, .3)",
     complete: function(anim) {
       advance(true);
-    }
+    },
   });
 
   anime({
@@ -410,13 +403,13 @@ function closeAllBlocks() {
     width: w,
     delay: anime.stagger(100),
     duration: 1000,
-    easing: "easeOutCubic"
+    easing: "easeOutCubic",
   });
 
   anime({
     targets: ".titleBlock",
     opacity: 0,
-    delay: anime.stagger(100)
+    delay: anime.stagger(100),
   });
 }
 
@@ -429,7 +422,7 @@ function openBlock(b, off) {
     width: 1920,
     delay: off - 500,
     duration: 1500,
-    easing: "easeOutCubic"
+    easing: "easeOutCubic",
   });
 
   anime({
@@ -437,7 +430,7 @@ function openBlock(b, off) {
     opacity: 1,
     easing: "linear",
     delay: off + 100,
-    duration: 500
+    duration: 500,
   });
 
   anime({
@@ -446,7 +439,7 @@ function openBlock(b, off) {
     easing: "linear",
     delay: off + 5000,
     duration: 500,
-    complete: advance
+    complete: advance,
   });
 }
 
@@ -472,7 +465,7 @@ function focusBlock(i, noOpen) {
     targets: ".palette",
     left: targ + "px",
     duration: dur,
-    easing: "cubicBezier(.5, .05, .1, .3)"
+    easing: "cubicBezier(.5, .05, .1, .3)",
   });
 
   var openCount = 0;
@@ -518,14 +511,17 @@ function addColorBlock(i) {
 }
 
 function fuzzColor(_c) {
-  
   colorMode(HSB, 100);
-  
+
   var fc = color(_c.hex);
   var f = 10;
-  var nc = color(hue(fc) + random(-f,f), saturation(fc) + random(-f,f), brightness(fc) + random(-f,f));
+  var nc = color(
+    hue(fc) + random(-f, f),
+    saturation(fc) + random(-f, f),
+    brightness(fc) + random(-f, f)
+  );
 
-  return(fc);
+  return fc;
 }
 
 function clearBlocks() {
