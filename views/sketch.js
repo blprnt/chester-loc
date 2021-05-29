@@ -54,12 +54,12 @@ var usLit = {
 };
 
 var sunrise = {
-  url: "/data/rise.json",
+  url: "/data/rise2.json",
   name: "Sunrise",
 };
 
 var sunset = {
-  url: "/data/set.json",
+  url: "/data/set3.json",
   name: "Sunset",
 };
 
@@ -261,7 +261,7 @@ function sunRiseSet() {
     rc++;
   }
 
-  console.log(titles);
+  //console.log(titles);
 
   //add text
   var rainMakers = selectAll(".rainMaker");
