@@ -32,6 +32,8 @@ var timeQ;
 
 var currentScene;
 
+var animationList = [];
+
 //Data URLs
 var vizMaterials = {
   url: "/data/colorsVisualMaterials_all.json",
@@ -86,6 +88,16 @@ function setup() {
 }
 
 function draw() {
+
+  //animation management
+  var newAnimationList = [];
+  for (var n in animationList) {
+    if (!animationList[n].complete) {
+      newAnimationList.push(animationList[n]);
+    }
+  }
+  animationList = newAnimationList;
+
   //timer
   var now = new Date();
   var timeStr = now.getHours() + ":" + nf(now.getMinutes(), 2);
@@ -110,6 +122,12 @@ function draw() {
       advance(true);
       stacking = false;
     }
+  }
+}
+
+function clearAnimations() {
+  for(var n in animationList) {
+    aimationList[n].complete = null;
   }
 }
 
@@ -212,7 +230,7 @@ function sunRiseSet() {
   if (currentScene == 4) {
     //SUNRISE
 
-    anime({
+    var a1 = anime({
       targets: ".swing",
       top: 1080 - sstack + "px",
       easing: "linear",
@@ -224,6 +242,8 @@ function sunRiseSet() {
         loadColors(floor(random(4)));
       },
     });
+
+    animationList.push(a1);
   }
 
   if (currentScene == 5) {
@@ -231,7 +251,7 @@ function sunRiseSet() {
     palette.position(palette.position().x, 1080 - sstack);
     //colors = colors.reverse();
 
-    anime({
+    var a1 = anime({
       targets: ".swing",
       top: 0 + "px",
       easing: "linear",
@@ -243,6 +263,8 @@ function sunRiseSet() {
         loadColors(floor(random(4)));
       },
     });
+
+    animationList.push(a1);
   }
 
   var rc = 0;
@@ -254,7 +276,7 @@ function sunRiseSet() {
   for (var i = 0; i < blocks.length; i++) {
     var t = colors[blocks[i].cIndex].Title.join(" ");
     if (!tMap[t]) {
-      blocks[i].addClass("rainMaker");
+      blocks[i].addClass("sunMaker");
       titles[blocks[i].id()] = t;
       tMap[t] = true;
     }
@@ -264,7 +286,7 @@ function sunRiseSet() {
   //console.log(titles);
 
   //add text
-  var rainMakers = selectAll(".rainMaker");
+  var rainMakers = selectAll(".sunMaker");
   for (var i = 0; i < rainMakers.length; i++) {
     try {
       var b = rainMakers[i];
@@ -296,24 +318,28 @@ function makeItRain() {
   var si = floor(random(blocks.length - edge));
   //move to that block
 
-  anime({
+  var a1 = anime({
     targets: ".palette",
     left: -blocks[si].position().x + "px",
     duration: 3000,
     easing: "cubicBezier(.5, .05, .1, .3)",
   });
+  animationList.push(a1);
 
   //open the rest of the blocks
   for (var i = 0; i < edge; i++) {
     blocks[si + i].addClass("rainMaker");
   }
-  anime({
+  var a2 = anime({
     targets: ".rainMaker",
     width: rw,
     delay: anime.stagger(10, { start: 3000 }),
     duration: 100,
     easing: "easeOutCubic",
   });
+
+  animationList.push(a2);
+
   //add text
   var rainMakers = selectAll(".rainMaker");
   for (var i = 0; i < min(1000, rainMakers.length); i++) {
@@ -332,7 +358,7 @@ function makeItRain() {
     }
   }
   //animate
-  anime({
+  var a3 = anime({
     targets: ".rainText",
     left: "0px",
     delay: anime.stagger(100, { start: 5000 }),
@@ -340,7 +366,9 @@ function makeItRain() {
     easing: "easeOutCubic",
   });
 
-  anime({
+  animationList.push(a3);
+
+  var a4 = anime({
     targets: ".rainTextHolder",
     top: "-1080px",
     opacity: 0,
@@ -349,15 +377,19 @@ function makeItRain() {
     easing: "easeOutCubic",
   });
 
-  anime({
+  animationList.push(a4);
+
+  var a5 = anime({
     targets: null,
     duration: 45000,
     complete: endRain,
   });
+
+  animationList.push(a5);
 }
 
 function endRain() {
-  anime({
+  var a1 = anime({
     targets: ".rainMaker",
     width: w,
     delay: anime.stagger(5),
@@ -365,7 +397,7 @@ function endRain() {
     easing: "easeOutCubic",
   });
 
-  anime({
+  var a2 = anime({
     targets: null,
     duration: 9600,
     complete: function(anim) {
@@ -376,6 +408,9 @@ function endRain() {
       advance();
     },
   });
+
+  animationList.push(a1);
+  animationList.push(a2);
 }
 
 function focusNextBlock() {
@@ -388,7 +423,7 @@ function focusRandomBlock() {
 }
 
 function closeAllBlocks() {
-  anime({
+  var a1 = anime({
     targets: ".palette",
     left: 0 + "px",
     duration: 5000,
@@ -398,7 +433,7 @@ function closeAllBlocks() {
     },
   });
 
-  anime({
+  var a2 = anime({
     targets: ".openBlock",
     width: w,
     delay: anime.stagger(100),
@@ -406,18 +441,22 @@ function closeAllBlocks() {
     easing: "easeOutCubic",
   });
 
-  anime({
+  var a3 = anime({
     targets: ".titleBlock",
     opacity: 0,
     delay: anime.stagger(100),
   });
+  animationList.push(a1);
+  animationList.push(a2);
+  animationList.push(a3);
+
 }
 
 function openBlock(b, off) {
   var t = display(b.cIndex);
   b.addClass("openBlock");
 
-  anime({
+  var a1 = anime({
     targets: "#" + b.id(),
     width: 1920,
     delay: off - 500,
@@ -425,7 +464,7 @@ function openBlock(b, off) {
     easing: "easeOutCubic",
   });
 
-  anime({
+  var a2 = anime({
     targets: "#" + t.id(),
     opacity: 1,
     easing: "linear",
@@ -433,7 +472,7 @@ function openBlock(b, off) {
     duration: 500,
   });
 
-  anime({
+  var a3 = anime({
     targets: "#" + b.id(),
     opacity: 1,
     easing: "linear",
@@ -441,6 +480,10 @@ function openBlock(b, off) {
     duration: 500,
     complete: advance,
   });
+
+  animationList.push(a1);
+  animationList.push(a2);
+  animationList.push(a3);
 }
 
 function closeBlock(b) {
@@ -552,6 +595,7 @@ function loadColors(_i) {
 }
 
 function onColorsLoaded(_j) {
+  clearAnimations();
   colors = _j;
   stacking = true;
   //Data is loaded!
