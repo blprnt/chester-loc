@@ -172,7 +172,7 @@ html, body {
   color:white;
   font-size:10pt;
   opacity:0.7;
-  background:pink;
+  background:rgba(0,0,0,0.2);
   
 }
 
