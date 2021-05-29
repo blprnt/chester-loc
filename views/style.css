@@ -137,6 +137,7 @@ html, body {
   overflow-x: visible;
   overflow-y: visible;
   cursor: none;
+  transform: translate(0px,0px) rotate(0deg);
 }
 
 .rainTextHolder {
