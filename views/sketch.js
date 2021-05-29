@@ -92,7 +92,7 @@ function draw() {
   //animation management
   var newAnimationList = [];
   for (var n in animationList) {
-    if (!animationList[n].complete) {
+    if (!animationList[n].complete && !animationList[n].paused) {
       newAnimationList.push(animationList[n]);
     }
   }
@@ -126,9 +126,11 @@ function draw() {
 }
 
 function clearAnimations() {
+  console.log("clearing " + animationList.length + "animations");
   for(var n in animationList) {
-    animationList[n].pause();
+    if (!animationList[n].paused) animationList[n].pause();
     animationList[n].complete = null;
+    console.log(animationList[n]);
   }
 }
 
