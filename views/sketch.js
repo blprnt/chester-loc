@@ -37,12 +37,12 @@ var animationList = [];
 //Data URLs
 var vizMaterials = {
   url: "/data/colorsVisualMaterials_all.json",
-  name: "Visuals",
+  name: "Photographs and Visual Materials",
 };
 
 var maps = {
   url: "/data/colorsMaps_all.json",
-  name: "Maps",
+  name: "Geography and Maps",
 };
 
 var music = {
@@ -159,7 +159,7 @@ function setTimes() {
       trigger: sunSet,
     },
     {
-      time: "0:01",
+      time: "1:01",
       trigger: setTimes,
     },
   ];
